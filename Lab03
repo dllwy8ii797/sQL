@@ -1,0 +1,145 @@
+/*CREATE DATABASE shop;  */
+
+CREATE TABLE Shohin1333
+(shohin_id     CHAR(4) NOT NULL,
+ shohin_name   VARCHAR(100) NOT NULL,
+ shohin_catalg VARCHAR(32) NOT NULL,
+ sell_price    INTEGER,
+ buying_price  INTEGER,
+ reg_date      DATE,
+ PRIMARY KEY (shohin_id))DEFAULT CHARSET=utf8;
+ 
+ -- MySQL
+-- DML：新增資料
+START TRANSACTION;
+INSERT INTO Shohin1333 VALUES ('0001', 'T恤', '衣物', 1000, 500, '2009-09-20');
+INSERT INTO Shohin1333 VALUES ('0002', '打孔機', '辦公用品', 500, 320, '2009-09-11');
+INSERT INTO Shohin1333 VALUES ('0003', '襯衫', '衣物', 4000, 2800, NULL);
+INSERT INTO Shohin1333 VALUES ('0004', '菜刀', '廚房用品', 3000, 2800, '2009-09-20');
+INSERT INTO Shohin1333 VALUES ('0005', '壓力鍋', '廚房用品', 6800, 5000, '2009-01-15');
+INSERT INTO Shohin1333 VALUES ('0006', '叉子', '廚房用品', 500, NULL, '2009-09-20');
+INSERT INTO Shohin1333 VALUES ('0007', '刨絲器', '廚房用品', 880, 790, '2008-04-28');
+INSERT INTO Shohin1333 VALUES ('0008', '鋼珠筆', '辦公用品', 100, NULL, '2009-11-11');
+COMMIT;
+---------------------------------------------
+-- DDL：建立資料表  StoreShohin
+CREATE TABLE StoreShohin1333
+(store_id  CHAR(4)       NOT NULL,
+ store_name  VARCHAR(200) NOT NULL,
+ shohin_id CHAR(4)       NOT NULL,
+ s_amount     INTEGER       NOT NULL,
+ PRIMARY KEY (store_id, shohin_id)) DEFAULT CHARSET=utf8;
+ 
+ 
+-- MySQL
+START TRANSACTION;
+
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000A',	'東京',		'0001',	30);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000A',	'東京',		'0002',	50);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000A',	'東京',		'0003',	15);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000B',	'名古屋',	'0002',	30);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000B',	'名古屋',	'0003',	120);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000B',	'名古屋',	'0004',	20);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000B',	'名古屋',	'0006',	10);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000B',	'名古屋',	'0007',	40);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000C',	'大阪',		'0003',	20);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000C',	'大阪',		'0004',	50);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000C',	'大阪',		'0006',	90);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000C',	'大阪',		'0007',	70);
+INSERT INTO StoreShohin1333 (store_id, store_name, shohin_id, s_amount) VALUES ('000D',	'福岡',		'0001',	100);
+
+COMMIT;
+
+
+
+-------------------------------------------------
+CREATE TABLE StockShohin1333
+( whouse_id   	 CHAR(4)    NOT NULL,
+  shohin_id   	 CHAR(4)    NOT NULL,
+  stock_amount 	 INTEGER    NOT NULL,
+  PRIMARY KEY (whouse_id, shohin_id));
+  
+  START TRANSACTION;
+
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0001',	0);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0002',	120);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0003',	200);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0004',	3);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0005',	0);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0006',	99);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0007',	999);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S001',	'0008',	200);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0001',	10);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0002',	25);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0003',	34);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0004',	19);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0005',	99);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0006',	0);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0007',	0);
+INSERT INTO StockShohin1333 (whouse_id, shohin_id, stock_amount) VALUES ('S002',	'0008',	18);
+
+COMMIT;
+---------------------------------------------
+
+
+
+-- 1 SELECT COUNT(*)
+-- FROM shohin1333
+-- WHERE buying_price IS NOT NULL;
+-- 2 SELECT SUM(sell_price)
+-- FROM shohin1333;
+-- 3 SELECT SUM(sell_price) AS total_sell_price, SUM(buying_price) AS total_buying_price
+-- FROM shohin1333;
+-- 4SELECT AVG(sell_price) AS average_sell_price, AVG(buying_price) AS average_buying_price
+-- FROM shohin1333;
+-- 5 SELECT MAX(reg_date) AS max_reg_date, MIN(reg_date) AS min_reg_date
+-- FROM shohin1333;
+-- 6 SELECT COUNT(DISTINCT shohin_catalg) AS total_categories
+-- FROM shohin1333;
+-- 7 SELECT shohin_catalg, COUNT(*) AS record_count
+-- FROM shohin1333
+-- GROUP BY shohin_catalg;
+-- 8 SELECT buying_price, COUNT(*) AS count
+-- FROM shohin1333
+-- WHERE shohin_catalg = '衣物'
+-- GROUP BY buying_price;
+-- 9 SELECT shohin_catalg, COUNT(*) AS record_count
+-- FROM shohin1333
+-- GROUP BY shohin_catalg
+-- HAVING COUNT(*) = 2;
+-- 10 SELECT shohin_catalg, AVG(sell_price) AS average_sell_price
+-- FROM shohin1333
+-- GROUP BY shohin_catalg
+-- HAVING AVG(sell_price) >= 2500;
+-- 11 SELECT shohin_catalg, COUNT(*) AS record_count
+-- FROM shohin1333
+-- WHERE shohin_catalg = '衣物'
+-- GROUP BY shohin_catalg;
+-- 12 SELECT *
+-- FROM shohin1333
+-- ORDER BY sell_price ASC, shohin_id ASC;
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
